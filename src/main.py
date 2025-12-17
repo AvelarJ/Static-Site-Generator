@@ -1,12 +1,32 @@
-from textnode import TextType, TextNode, text_node_to_html_node
-from htmlnode import HTMLNode, LeafNode, ParentNode
-from markdown_utilities import split_nodes_delimiter, extract_markdown_images, split_nodes_image, split_nodes_link, text_to_textnodes
+import os
+import shutil
+
+dir_path_static = "./static"
+dir_path_public = "./public"
+
 
 def main():
+    print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
+
+    print("Copying static files to public directory...")
+    copy_files_recursive(dir_path_static, dir_path_public)
     
-    text = TextNode("`First` word as a code block", TextType.TEXT)
-    result = split_nodes_delimiter([text], '`', TextType.CODE)
-    print(result)
+
+
+def copy_files_recursive(source_dir_path, dest_dir_path):
+    if not os.path.exists(dest_dir_path):
+        os.mkdir(dest_dir_path)
+
+    for filename in os.listdir(source_dir_path):
+        from_path = os.path.join(source_dir_path, filename)
+        dest_path = os.path.join(dest_dir_path, filename)
+        print(f" * {from_path} -> {dest_path}")
+        if os.path.isfile(from_path):
+            shutil.copy(from_path, dest_path)
+        else:
+            copy_files_recursive(from_path, dest_path)
     
     
     

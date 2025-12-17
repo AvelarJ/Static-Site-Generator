@@ -107,7 +107,7 @@ def extract_markdown_links(text):
     return matches
 
 
-#Culminating function which goes through all base delimiters then images and links
+#Culminating function which goes through all inline delimiters then images and links
 def text_to_textnodes(text):
     if type(text) is str:
         #print("str input converted to a TextNode")
