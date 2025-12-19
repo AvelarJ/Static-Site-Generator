@@ -32,7 +32,8 @@ def markdown_to_html_node(markdown):
             child_nodes.append(code_html)
             
         elif b_type == BlockType.QUOTE:
-            text = block.lstrip('> ')
+            removed_newlines = block.replace("\n", " ")
+            text = removed_newlines.replace('> ', '')
             
             quote_html = ParentNode(tag = 'blockquote', children=text_to_children(text))
             child_nodes.append(quote_html)
@@ -43,7 +44,9 @@ def markdown_to_html_node(markdown):
             list_items = block.split('- ')[1:]
             for li in list_items:
                 removed_newlines = li.replace("\n", "")
-                uno_list.append(LeafNode('li', removed_newlines))
+                children = text_to_children(li)
+                
+                uno_list.append(ParentNode('li', children))
                 
             uno_html = ParentNode(tag = 'ul', children=uno_list)
             child_nodes.append(uno_html)
@@ -54,6 +57,8 @@ def markdown_to_html_node(markdown):
             list_items = [line.split(". ", 1)[1] for line in block.splitlines()]
             for li in list_items:
                 removed_newlines = li.replace("\n", "")
+                children = text_to_children(li)
+                
                 o_list.append(LeafNode('li', removed_newlines))
                 
             o_html = ParentNode(tag = 'ol', children=o_list)
@@ -69,7 +74,7 @@ def markdown_to_html_node(markdown):
             
 def text_to_children(text):
     final_list = []
-    removed_newlines = text.replace("\n", " ")
+    removed_newlines = text.replace("\n", "")
     text_nodes = text_to_textnodes(removed_newlines)
     
     for n in text_nodes:

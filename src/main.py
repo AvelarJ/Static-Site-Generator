@@ -1,5 +1,6 @@
 import os
 import shutil
+from generate_page import generate_page
 
 dir_path_static = "./static"
 dir_path_public = "./public"
@@ -12,6 +13,14 @@ def main():
 
     print("Copying static files to public directory...")
     copy_files_recursive(dir_path_static, dir_path_public)
+    
+    #Generate page function
+    print("Generating HTML page from markdown file")
+    f_path = './content/index.md'
+    t_path = './template.html'
+    d_path = './public/index.html'
+    
+    generate_page(f_path, t_path, d_path)
     
 
 

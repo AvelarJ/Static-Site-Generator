@@ -1,6 +1,5 @@
 from enum import Enum
 import re
-from textnode import TextNode, TextType
 
 class BlockType(Enum):
     PARAGRAPH = 'paragraph'
