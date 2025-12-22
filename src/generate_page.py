@@ -56,14 +56,22 @@ def generate_page(from_path, template_path, dest_path):
         else:
             final_template += "".join(line)
             
-    #Now write the final full HTML to dest_path
-    #First checking if public directory exists
-    dest_dir = Path(dest_path).parent
-    if not os.path.exists(dest_dir):
-        os.mkdir(dest_dir)
+    dest_dir_path = os.path.dirname(dest_path)
+    if dest_dir_path != "":
+        os.makedirs(dest_dir_path, exist_ok=True)
+    to_file = open(dest_path, "w")
+    to_file.write(final_template)
         
-    with open(dest_path, 'w') as f:
-        f.write(final_template)
+        
+def generate_page_recursive(dir_path_content, template_path, dest_dir_path):
+    for filename in os.listdir(dir_path_content):
+        from_path = os.path.join(dir_path_content, filename)
+        dest_path = os.path.join(dest_dir_path, filename)
+        if os.path.isfile(from_path):
+            dest_path = Path(dest_path).with_suffix(".html")
+            generate_page(from_path, template_path, dest_path)
+        else:
+            generate_page_recursive(from_path, template_path, dest_path)
     
         
 

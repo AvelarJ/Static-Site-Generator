@@ -59,7 +59,7 @@ def markdown_to_html_node(markdown):
                 removed_newlines = li.replace("\n", "")
                 children = text_to_children(li)
                 
-                o_list.append(LeafNode('li', removed_newlines))
+                o_list.append(ParentNode('li', children))
                 
             o_html = ParentNode(tag = 'ol', children=o_list)
             child_nodes.append(o_html)
