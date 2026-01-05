@@ -8,11 +8,11 @@ class TestMarkToHTML(unittest.TestCase):
     
     def test_paragraphs(self):
         md = """
-This is **bolded** paragraph
-text in a p
+This is **bolded** paragraph 
+text in a p 
 tag here
 
-This is another paragraph with _italic_ text and `code` here
+This is another paragraph with _italic_ text and `code` here 
 also with a [link](www.example.com)
 """
 
