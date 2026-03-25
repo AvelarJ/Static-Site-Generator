@@ -14,9 +14,9 @@ Visit the deployed site: [https://avelarj.github.io/Static-Site-Generator/](http
 - Copies static assets (CSS, images, etc.) to the output directory automatically
 - Adjustable base path for deployment to subdirectories (e.g., GitHub Pages)
        
-  - ## Project Structure
+## Project Structure
        
-    - ```
+```
       .
       ├── content/          # Your Markdown source files go here
       ├── static/           # Static assets (CSS, images, fonts, etc.)
@@ -33,7 +33,7 @@ Visit the deployed site: [https://avelarj.github.io/Static-Site-Generator/](http
       ├── main.sh           # Run locally with a dev server
       ├── build.sh          # Build for GitHub Pages deployment
       └── test.sh           # Run all unit tests
-      ```
+```
 
 ## Requirements
 
